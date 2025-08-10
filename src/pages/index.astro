@@ -1,16 +1,98 @@
 ---
+import BaseLayout from '../layouts/base.astro';
+
+import DiscordCard from '../components/DiscordPanel.astro';
+import EmailIcon from '../components/icons(i cant understand svg injection)/email.astro';
+import GithubIcon from '../components/icons(i cant understand svg injection)/github.astro';
+import DiscordIcon from '../components/icons(i cant understand svg injection)/discord.astro';
+import OsuIcon from '../components/icons(i cant understand svg injection)/osu.astro';
+
+
+const banner = '/banner.webp';
+const avatar = '/avatar.jpg';
+const username = 'ra1nxyz';
+
+const socials = [
+  { icon: EmailIcon, label: 'Email', handle: 'rain@buggirls.xyz', url: 'mailto:rain@buggirls.xyz' },
+  { icon: GithubIcon, label: 'GitHub', handle: 'ra1nxyz', url: 'https://github.com/ra1nxyz' },
+  { icon: OsuIcon, label: 'Osu!', handle: 'ra1nxyz', url: 'https://osu.ppy.sh/users/12887122' }
+];
 
 ---
 
 <html lang="en">
 	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+	<meta charset="UTF-8" />
+	<style>
+		body {
+		background: #181d22;
+		color: white;
+		font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+		text-align: center;
+		margin: 2rem;
+		}
+		h1 {
+		font-size: 3rem;
+		}
+		p {
+		margin-bottom: 2rem;
+		font-size: 1.2rem;
+		}
+		h2 {
+		font-size: 2rem;
+		margin-bottom: 1rem;
+		}
+		.socials-list {
+		max-width: 400px;
+		margin: auto;
+		text-align: left;
+		}
+		.social-item {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin: 0.5rem 0;
+		color: white;
+		}
+		.social-icon {
+		width: 32px;
+		height: 32px;
+		fill: #2e5070;
+		flex-shrink: 0;
+		overflow: visible;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		}
+		.social-label {
+		font-weight: 600;
+		width: 70px;
+		color: #2e5070;
+		}
+		.social-value {
+		background: #3d87cc;
+		padding: 0.3rem 0.8rem;
+		border-radius: 15px;
+		font-weight: 600;
+		}
+		a.social-value {
+		color: white;
+		text-decoration: none;
+		transition: background 0.3s ease;
+		}
+		a.social-value:hover {
+		background: #3d87cc;
+		}
+	</style>
 	</head>
-	<body>
-		<h1>Astro</h1>
+	<body></body>
+
+<BaseLayout title="Home"></BaseLayout>
+	<h1>nyaaa</h1>
+	<p>i do things for fun and nothing else</p>
+	
+	<h2>Socials</h2>
+	<DiscordCard banner={banner} avatar={avatar} username={username} platformIcon={DiscordIcon} socials={socials} />
 	</body>
-</html>
+	</html>
+</BaseLayout>

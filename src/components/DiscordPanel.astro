@@ -1,0 +1,133 @@
+---
+interface Props {
+  banner: string;
+  avatar: string;
+  username: string;
+  platformIcon: any; // ??
+  socials?: { icon: any; handle: string; label: string; url?: string }[];
+}
+
+const { banner, avatar, username, platformIcon, socials = [] } = Astro.props;
+---
+
+<style>
+  
+  .panel-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    width: 120%;
+  }
+  .card {
+    flex: 0 0 400px;
+    max-width: 620px;
+    max-height: 260px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #3d87cc;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+  }
+  .banner {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+  }
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.5rem 1rem;
+    gap: 0.5rem;
+  }
+  .avatar {
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    border: 2.5px solid #2e5070;
+    object-fit: cover;
+  }
+  .username {
+    font-weight: 500;
+    font-size: 1.2rem;
+    letter-spacing: 0.01em;
+  }
+  .icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .socials {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  .social-row {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 1rem;
+    color: #fff;
+    background: transparent;
+    border-radius: 6px;
+    padding: 0.4rem 0.9rem;
+    min-width: 160px;
+  }
+  .social-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    fill: #fff;
+    overflow: visible;
+  }
+  .social-handle {
+    font-weight: 500;
+    color: #2e5070;
+    text-decoration: none;
+    background: #3d87cc;
+    color: #fff;
+    border-radius: 999px;
+    padding: 0.2em 0.8em;
+    margin-left: 0.5em;
+    font-size: 1em;
+  }
+</style>
+
+<div class="panel-row">
+  <div class="card">
+    <img src={banner} alt="Banner" class="banner" />
+    <div class="content">
+      <img src={avatar} alt={`${username} avatar`} class="avatar" />
+      <span class="icon"><platformIcon /></span>
+      <div class="username">{username}</div>
+    </div>
+  </div>
+  {socials.length > 0 && (
+    <div class="socials">
+      {socials.map(({ icon: Icon, label, handle, url }) => (
+        <div class="social-row">
+          <span class="social-icon"><Icon /></span>
+          <span>{label}</span>
+          {url ? (
+            <a href={url} class="social-handle" target="_blank" rel="noopener noreferrer">{handle}</a>
+          ) : (
+            <span class="social-handle">{handle}</span>
+          )}
+        </div>
+      ))}
+    </div>
+  )}
+</div>
+
