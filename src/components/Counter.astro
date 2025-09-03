@@ -1,0 +1,57 @@
+<div id="view-counter" class="counter" aria-label="page views" data-hidden="true"></div>
+
+<style>
+  .counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+  }
+  .counter img {
+    width: 28px;
+    height: 42px;
+    display: block;
+  }
+</style>
+
+<script type="module" is:inline>
+  const workerURL = 'https://astro-view-counter.ov3rsights.workers.dev/count';
+  const key = null;
+
+  const DIGIT_MAP = {
+    "0": "/digits/0.png",
+    "1": "/digits/1.png",
+    "2": "/digits/2.png",
+    "3": "/digits/3.png",
+    "4": "/digits/4.png",
+    "5": "/digits/5.png",
+    "6": "/digits/6.png",
+    "7": "/digits/7.png",
+    "8": "/digits/8.png",
+    "9": "/digits/9.png",
+  };
+
+  window.addEventListener('DOMContentLoaded', async () => {
+    try {
+      const url = new URL(workerURL);
+      if (key) url.searchParams.set('key', key);
+
+      const res = await fetch(url.toString(), { cache: 'no-store' });
+      const { count } = await res.json();
+
+      const container = document.getElementById('view-counter');
+      if (!container) return;
+
+      container.innerHTML = '';
+      for (const d of String(count)) {
+        const img = document.createElement('img');
+        img.src = DIGIT_MAP[d] ?? DIGIT_MAP["0"];
+        img.alt = d;
+        container.appendChild(img);
+      }
+
+      container.dataset.hidden = 'false';
+    } catch (err) {
+      console.error('View counter error:', err);
+    }
+  });
+</script>

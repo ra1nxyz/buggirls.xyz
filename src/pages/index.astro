@@ -18,6 +18,8 @@ const socials = [
   { icon: OsuIcon, label: 'Osu!', handle: 'ra1nxyz', url: 'https://osu.ppy.sh/users/12887122' }
 ];
 
+import Counter from '../components/Counter.astro';
+
 ---
 
 <html lang="en">
@@ -83,6 +85,26 @@ const socials = [
 		a.social-value:hover {
 		background: #3d87cc;
 		}
+		.moxy {
+		position: fixed;
+		left: 50%;
+		bottom: 2rem;
+		transform: translateX(-50%);
+		color: #fff;
+		opacity: 0.7;
+		font-size: 1.1rem;
+		z-index: 100;
+		pointer-events: none; /* so it doesn't block clicks */
+		}
+		.counter-wrapper {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+		justify-content: flex-start; /* content at top, counter pushed down manually */
+		align-items: center;
+		padding: 8rem;
+		gap: 2rem;
+		}
 	</style>
 	</head>
 	<body></body>
@@ -92,7 +114,14 @@ const socials = [
 	<p>i do things for fun and nothing else</p>
 	
 	<h2>Socials</h2>
-	<DiscordCard banner={banner} avatar={avatar} username={username} platformIcon={DiscordIcon} socials={socials} />
-	</body>
-	</html>
+	<DiscordCard banner={banner} avatar={avatar} username={username} PlatformIcon={DiscordIcon} socials={socials} />
+	<div class="counter-wrapper">
+      <Counter />
+		</div>
+	</div>
+
+	<div class="moxy">
+		Thank you Moxy for your inspiration, and ultimately the  
+		<a href="https://mothoxi.de" style="color:#4af; pointer-events:auto;">design</a> for this page. Rest easy friend. 💜
+	</div>
 </BaseLayout>

@@ -3,11 +3,11 @@ interface Props {
   banner: string;
   avatar: string;
   username: string;
-  platformIcon: any; // ??
+  PlatformIcon: any; // ??
   socials?: { icon: any; handle: string; label: string; url?: string }[];
 }
 
-const { banner, avatar, username, platformIcon, socials = [] } = Astro.props;
+const { banner, avatar, username, PlatformIcon, socials = [] } = Astro.props;
 ---
 
 <style>
@@ -23,9 +23,9 @@ const { banner, avatar, username, platformIcon, socials = [] } = Astro.props;
     width: 120%;
   }
   .card {
+    position: relative;
     flex: 0 0 400px;
-    max-width: 620px;
-    max-height: 260px;
+    height: 220px;
     border-radius: 10px;
     overflow: hidden;
     background-color: #3d87cc;
@@ -43,26 +43,30 @@ const { banner, avatar, username, platformIcon, socials = [] } = Astro.props;
     align-items: center;
     justify-content: flex-start;
     padding: 0.5rem 1rem;
-    gap: 0.5rem;
+    gap: 0.7rem;
+    margin-top: -3.5px;
   }
   .avatar {
-    width: 82px;
-    height: 82px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
-    border: 2.5px solid #2e5070;
     object-fit: cover;
   }
   .username {
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     letter-spacing: 0.01em;
   }
-  .icon {
-    width: 22px;
-    height: 22px;
+  .PlatformIcon {
+    position: absolute;
+    right: 1.2rem;
+    bottom: 0.8rem;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 2;
   }
   .socials {
     display: flex;
@@ -110,9 +114,9 @@ const { banner, avatar, username, platformIcon, socials = [] } = Astro.props;
     <img src={banner} alt="Banner" class="banner" />
     <div class="content">
       <img src={avatar} alt={`${username} avatar`} class="avatar" />
-      <span class="icon"><platformIcon /></span>
       <div class="username">{username}</div>
     </div>
+    <span class="PlatformIcon"><PlatformIcon /></span>
   </div>
   {socials.length > 0 && (
     <div class="socials">
