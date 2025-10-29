@@ -24,12 +24,14 @@ const { banner, avatar, username, PlatformIcon, socials = [], href } = Astro.pro
     margin: 2rem auto;
     margin-top: 0.5rem;
     max-width: 800px;
-    width: 120%;
+    width: 100%;
+    flex-wrap: wrap; /* wrap below card on small res */
   }
   .card {
     position: relative;
-    flex: 0 0 400px;
-    height: 220px;
+    flex: 1 1 320px;
+    max-width: 420px;
+    min-height: 180px;
     border-radius: 10px;
     overflow: hidden;
     background: #121e2b;
@@ -118,6 +120,25 @@ const { banner, avatar, username, PlatformIcon, socials = [], href } = Astro.pro
     padding: 0.2em 0.8em;
     margin-left: 0.5em;
     font-size: 1em;
+  }
+
+  /* small res */
+  @media (max-width: 640px) {
+    .panel-row {
+      gap: 1rem;
+      margin: 1rem auto;
+    }
+    .card {
+      flex: 1 1 100%;
+      max-width: 100%;
+      min-height: 150px;
+    }
+    .banner { height: 110px; }
+    .content { padding: 0.5rem; gap: 0.6rem; }
+    .avatar { width: 56px; height: 56px; }
+    .username { font-size: 1rem; }
+    .socials { align-items: center; width: 100%; }
+    .social-row { min-width: auto; width: 100%; justify-content: flex-start; }
   }
 </style>
 

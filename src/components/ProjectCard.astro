@@ -58,6 +58,19 @@ const { repo } = Astro.props;
     color:var(--muted, #cbd5e1);
     font-size:0.9rem;
   }
+    .lang { padding: 0.15rem 0.5rem; background: rgba(0,0,0,0.12); border-radius:999px }
+  }
+
+  @media (max-width: 640px) {
+    .project-card {
+      padding: 1rem;
+      min-height: 130px;
+    }
+    .owner-avatar { width: 32px; height: 32px; }
+    .title { font-size: 1.05rem; }
+    .description { -webkit-line-clamp: 4; }
+    .meta { font-size: 0.95rem; }
+  }
   .stars { display:flex; gap:0.35rem; align-items:center }
   .lang { padding: 0.15rem 0.5rem; background: rgba(0,0,0,0.12); border-radius:999px }
 </style>

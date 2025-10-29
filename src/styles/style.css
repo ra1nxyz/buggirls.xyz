@@ -131,3 +131,31 @@ padding: 3rem 1.5rem;
 .text-left, .main-text-left{
 text-align: left !important;
 }
+
+/* resolution fix maybe i hope */
+@media (max-width: 640px) {
+  header nav {
+    gap: 0.6rem;
+    padding: 0.5rem 0.75rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    align-items: center;
+  }
+
+  header nav img { height: 3rem; }
+
+  header nav a {
+    flex: 0 0 auto;
+    padding: 0.5rem 0.8rem;
+    font-size: 1rem; 
+    white-space: nowrap;
+  }
+
+  .main { padding: 0 0.75rem; align-items: stretch; }
+
+  .moxy { bottom: 1.25rem; font-size: 1rem; }
+
+  .counter-wrapper { padding: 1.5rem 0.75rem; }
+
+  .blog-main, .projects-header { padding: 0 0.75rem; }
+}
