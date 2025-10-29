@@ -16,7 +16,6 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@astrojs/image": "^0.18.0",
     "@types/node": "^24.3.0"
   }
 }
