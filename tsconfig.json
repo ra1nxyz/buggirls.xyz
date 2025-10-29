@@ -5,8 +5,7 @@
     "module": "esnext",
     "types": ["astro/client"],
     "jsx": "preserve",
-    "jsxImportSource": "react",
-    "moduleResolution": "node"
+    "jsxImportSource": "react"
   },
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"]
