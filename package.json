@@ -9,9 +9,14 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.12.9"
+    "@astrojs/check": "^0.9.5",
+    "@astrojs/cloudflare": "^12.6.10",
+    "astro": "^5.15.1",
+    "date-fns": "^4.1.0",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@astrojs/image": "^0.18.0",
     "@types/node": "^24.3.0"
   }
 }

@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../../layouts/base.astro";
+import { format } from "date-fns";
+import { getCollection, getEntry } from 'astro:content';
+import "../../styles/blog.css";
+import "../../styles/blog-typography.css";
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+  }));
+}
+
+
+const { slug } = Astro.params;
+const posts = await getCollection("blog");
+const post = posts.find((p) => p.slug === slug);
+
+if (!post) {
+  throw new Error(`Post not found: ${slug}`);
+}
+
+const wordcount = post.body ? post.body.split(/\s+/).length : 0;
+const readLength = Math.ceil(wordcount / 215);
+
+let Rendered = null;
+if (typeof post.render === 'function') {
+  const rendered = await post.render();
+  Rendered = rendered.Content;
+}
+---
+<BaseLayout title={`${post.data.title} | Blog`} mainClass="blog-main">
+  <div class="post-body">
+    <meta name="description" content={post.data.description || ''} />
+    <a class="post-back" href="/blog/">&#8592; Back</a>
+    <h1>{post.data.title}</h1>
+
+    <div class="post-meta">
+      <strong><time>{format(new Date(post.data.date), "d MMM yyyy")}</time></strong>
+      <span> • {wordcount ?? 'WHAT'} words</span>
+      <span> • {readLength ?? 'WHAT'} minute read</span>
+    </div>
+
+    <article class="content">
+      {Rendered ? <Rendered /> : <div set:html={String(post.body ?? "")} />}
+    </article>
+    <div class="extra-space"></div>
+  </div>
+</BaseLayout>

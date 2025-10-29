@@ -22,3 +22,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+src/content/blog/osu!gamingctf2025.md
+.gitignore
+src/content/blog/penistest copy 2.md
+.gitignore
+src/content/blog/penistest copy.md

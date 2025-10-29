@@ -1,0 +1,77 @@
+---
+interface Props {
+  repo: any;
+}
+
+const { repo } = Astro.props;
+---
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1rem;
+    background: var(--card-bg, #0f1720);
+    border: 1px solid #2d4f6e8f;
+    border-radius: 8px;
+    color: var(--text, #fff);
+    text-decoration: none;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    min-height: 110px;
+  }
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+  }
+  .card-top {
+    display:flex;
+    gap:0.75rem;
+    align-items:center;
+  }
+  .owner-avatar {
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    object-fit:cover;
+    flex:0 0 28px;
+  }
+  .title {
+    font-weight:700;
+    font-size:0.98rem;
+    color:var(--muted-accent, #fff);
+  }
+  .description{
+    color:var(--muted, #cbd5e1);
+    font-size:0.95rem;
+    line-height:1.25;
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .meta{
+    display:flex;
+    gap:0.75rem;
+    align-items:center;
+    margin-top:auto;
+    color:var(--muted, #cbd5e1);
+    font-size:0.9rem;
+  }
+  .stars { display:flex; gap:0.35rem; align-items:center }
+  .lang { padding: 0.15rem 0.5rem; background: rgba(0,0,0,0.12); border-radius:999px }
+</style>
+
+<a class="project-card" href={repo.html_url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${repo.full_name} on GitHub`}>
+  <div class="card-top">
+    <img class="owner-avatar" src={repo.owner?.avatar_url} alt={`${repo.owner?.login} avatar`} loading="lazy" />
+    <div class="title">{repo.name}</div>
+  </div>
+
+  {repo.description ? <div class="description">{repo.description}</div> : <div class="description">No description.</div>}
+
+  <div class="meta">
+    <div class="stars">★ {repo.stargazers_count ?? 0}</div>
+    {repo.language && <div class="lang">{repo.language}</div>}
+  </div>
+</a>

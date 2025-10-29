@@ -1,0 +1,97 @@
+:root{
+  --bg: #0f1112;
+  --text: #dfe6ee;
+  --muted: #9aa6b2;
+  --accent: #66c2ff;
+  --code-bg: #0b1012;
+}
+
+.post-body {
+  max-width: 780px;
+  margin: 0 auto;
+  color: var(--text);
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial;
+  line-height: 1.6;
+  font-size: 16px;
+  padding: 0 1rem;
+}
+
+/* headings */
+.post-body h1,
+.post-body h2,
+.post-body h3 {
+  color: var(--text);
+  margin-top: 1.1em;
+  margin-bottom: 0.4em;
+  line-height: 1.15;
+  font-weight: 700;
+}
+.post-body h1 { font-size: 1.9rem; }
+.post-body h2 { font-size: 1.4rem; }
+.post-body h3 { font-size: 1.125rem; }
+
+.post-body p { margin: 0 0 0.85rem 0; }
+.post-body ul, .post-body ol { margin: 0.2rem 0 0.85rem 1.25rem; }
+
+/* time / meta small */
+.post-meta { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.75rem; }
+
+/* images */
+.post-body img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+  border-radius: 6px;
+  box-shadow: rgba(0,0,0,0.35) 0 4px 10px;
+}
+
+/* blockquote */
+.post-body blockquote {
+  border-left: 3px solid rgba(255,255,255,0.06);
+  padding: 0.6rem 1rem;
+  color: var(--muted);
+  background: rgba(255,255,255,0.01);
+  margin: 0.75rem 0;
+}
+
+/* code / pre */
+.post-body pre {
+  background: var(--code-bg);
+  color: #d6deeb;
+  padding: 0.5rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: "Fira Code", "Source Code Pro", monospace;
+  font-size: 0.9rem;
+  margin: 0.9rem 0;
+}
+.post-body code {
+  padding: 0.15rem 0.35rem;
+  border-radius: 1px;
+  font-family: jetbrains-mono, monospace;
+  font-size: 0.92em;
+}
+
+/* tables */
+.post-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.6rem 0;
+}
+.post-body th, .post-body td {
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 0.45rem 0.6rem;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+/* small screens */
+@media (max-width: 640px) {
+  .post-body { padding: 0 1rem; font-size: 15px; }
+  .post-body h1 { font-size: 1.5rem; }
+}
+
+.extra-space {
+    height:200px;
+}

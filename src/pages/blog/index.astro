@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../../layouts/base.astro";
+import { getCollection } from "astro:content";
+import { format } from "date-fns";
+import "../../styles/blog.css"
+
+const posts = (await getCollection("blog") as any[])
+  .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date))
+
+// group posts by year (i guess??? idk yet)
+const grouped: Record<string, any[]> = posts.reduce((acc: Record<string, any[]>, post: any) => {
+  const year = String(new Date(post.data.date).getFullYear());
+  (acc[year] ||= []).push(post);
+  return acc;
+}, {});
+
+
+const years = Object.keys(grouped).sort((a, b) => Number(b) - Number(a));
+---
+<BaseLayout title="Blog | buggirls.xyz" mainClass="blog-main">
+  <h1 class="h1">Blog</h1>
+  <p class="desc">random stuff mostly actually</p>
+  <h2 class="h2posts">Posts</h2>
+  <div class="posts">
+    {years.map(year => (
+      <section class="group">
+        <h2 class="year">{year}</h2>
+        <div class="posts">
+          {grouped[year].map((post) => (
+            <article class="post">
+              <time class="post-date">{format(new Date(post.data.date), "MMM d")}</time>
+              <div class="post-info">
+                <a class="post-title" href={`/blog/${post.slug}/`}>{post.data.title}</a>
+                {post.data.description && <p class="post-description">{post.data.description}</p>}
+                <meta name="description" content="Blogs! by rainy"} />
+              </div>
+            </article>
+          ))}
+        </div>
+        
+      </section>
+    ))}
+  </div>
+</BaseLayout>

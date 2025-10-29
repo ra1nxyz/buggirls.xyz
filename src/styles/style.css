@@ -1,0 +1,133 @@
+html, body {
+  background: #101316;
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  align-content: center;
+  /*margin: 2rem;*/
+  padding-top: 2.5rem; /* space for fixed header */
+  }
+
+body.no-scroll,
+html.no-scroll {
+  overflow: hidden;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: #0f1720; 
+  box-shadow: 0 1px 8px rgba(0,0,0,0.5);
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 1200px;
+  /*margin: 0 auto; /* <- fit to thing */
+  padding: 0.6rem 1rem;
+}
+
+header nav img {
+  height: 3.2rem;
+  margin-right: 0.5rem;
+}
+
+header nav a {
+  color: #9fc3ef;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+header nav a:hover {
+  color: #fff;
+}
+
+.main {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: flex-start; /* don't center every element vertically */
+   text-align: center;
+}
+h1 {
+font-size: 3rem;
+}
+p {
+margin-bottom: 2rem;
+}
+h2 {
+font-size: 2rem;
+margin-top: 4rem;
+margin-bottom: 2rem;
+}
+.socials-list {
+max-width: 400px;
+margin: auto;
+text-align: left;
+}
+.social-item {
+display: flex;
+align-items: center;
+gap: 1rem;
+margin: 0.5rem 0;
+color: white;
+}
+.social-icon {
+width: 32px;
+height: 32px;
+fill: #9fc3ef;
+flex-shrink: 0;
+overflow: visible;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.social-label {
+font-weight: 600;
+width: 70px;
+color: #9fc3ef;
+}
+.social-value {
+background: #9fc3ef;
+padding: 0.3rem 0.8rem;
+border-radius: 15px;
+font-weight: 600;
+}
+a.social-value {
+color: white;
+text-decoration: none;
+transition: background 0.3s ease;
+}
+a.social-value:hover {
+background: #9fc3ef;
+}
+.moxy {
+position: fixed;
+left: 50%;
+bottom: 2rem;
+transform: translateX(-50%);
+color: #fff;
+opacity: 0.7;
+font-size: 1.1rem;
+z-index: 100;
+pointer-events: none; 
+}
+.moxy a.moxy-link { 
+  color: #4af; pointer-events: auto; 
+}
+.counter-wrapper {
+display: flex;
+flex-direction: column;
+min-height: calc(100vh - 4.2rem);
+justify-content: flex-start; 
+align-items: center;
+padding: 3rem 1.5rem; 
+}
+.text-left, .main-text-left{
+text-align: left !important;
+}

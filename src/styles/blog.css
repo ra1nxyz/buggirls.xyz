@@ -1,0 +1,87 @@
+.blog-main{
+    justify-content: center;
+    max-width: 880px;
+    margin: 0 auto;
+
+}
+
+.year{
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin: 1.5rem 0 0.75rem;
+    color: #ffffff;
+}
+
+.post-back{
+    color: #9fc3ef;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.post{
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.post-date{
+    width: 92px;
+    flex: 0 0 92px;
+    color: #9aa6b2;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.post-info{
+    flex: 1;
+    min-width: 0;
+}
+
+.post-title{
+    display: inline-block;
+    color:#9fc3ef; /*changelater*/
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.post-title:hover{
+    text-decoration: underline;
+}
+
+.post-description{
+    margin: 0.25rem 0 0;
+    color: #9aa6b2;
+    font-size: 0.95rem;
+    line-height: 1.35;
+}
+
+@media (max-width: 640px) {
+  .post { gap: 0.5rem; }
+  .post-date { width: 72px; flex: 0 0 72px; font-size: 0.85rem; }
+  .post-title { font-size: 1rem; }
+}
+
+
+.h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.blog-main .h2posts,
+.blog-main h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.desc {
+    justify-content: center;
+    display: flex;
+}

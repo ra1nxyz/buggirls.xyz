@@ -1,9 +1,76 @@
 ---
 import BaseLayout from '../layouts/base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const githubUser = 'ra1nxyz';
+const token = typeof process !== 'undefined' ? process.env.GITHUB_TOKEN : undefined; // do this later  or smn
+
+// blocklist: 
+const blockedListStatic: string[] = [
+  'EeveeSpotifyReborn'
+];
+const blockedFromEnv = typeof process !== 'undefined' ? (process.env.BLOCKED_REPOS || '') : '';
+const blockedSet = new Set([
+  ...blockedListStatic.map(s => s.toLowerCase()),
+  ...blockedFromEnv.split(',').map(s => s.trim().toLowerCase()).filter(Boolean),
+]);
+
+let repos: any[] = [];
+try {
+  const res = await fetch(`https://api.github.com/users/${githubUser}/repos?per_page=100&sort=updated`, {
+    headers: token ? { Authorization: `token ${token}` } : {}
+  });
+    if (res.ok) {
+      repos = await res.json();
+      // filter out private repos and blocklist
+      repos = repos
+        .filter((r: any) => !r.private)
+        .filter((r: any) => {
+          const name = (r.name || '').toString().toLowerCase();
+          const full = (r.full_name || '').toString().toLowerCase();
+          return !blockedSet.has(name) && !blockedSet.has(full);
+        })
+        .sort((a: any, b: any) => (b.stargazers_count || 0) - (a.stargazers_count || 0));
+    }
+} catch (err) {
+  repos = [];
+}
+
 ---
 
-<BaseLayout title="Projects">
-  <h1>wip!!!!!!s</h1>
-  <p>heres fumo</p>
-  <img src="/fumo.gif" alt="Fumo" />
+<BaseLayout title="Projects" mainClass="projects">
+  <div class="projects-header">
+    <h1>Projects</h1>
+    <p>test</p>
+    <meta name="description" content="projects, work in progress" />
+  </div>
+
+  <div class="projects-grid">
+    {repos.length ? (
+      repos.map((repo: any) => <ProjectCard repo={repo} />)
+    ) : (
+      <div class="empty">wilted rose</div>
+    )}
+  </div>
+
+  <style>
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+      gap:1rem;
+      margin:1rem auto 0;
+      max-width:1100px; /* maybe change later */
+      justify-content:center;
+      padding:0 1rem;
+    }
+    .projects-header{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 1rem 0.75rem;
+      text-align:center;
+    }
+    .projects-header h1{ font-size:2rem; margin:0 0 0.5rem 0 }
+    .projects-header p{ margin:0 0 1rem 0; color:var(--muted, #cbd5e1) }
+    .empty{ color:var(--muted, #cbd5e1); padding:1rem }
+  </style>
 </BaseLayout>

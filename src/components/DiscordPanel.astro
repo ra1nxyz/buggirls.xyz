@@ -1,13 +1,16 @@
 ---
+import { Image } from 'astro:assets';
+
 interface Props {
   banner: string;
   avatar: string;
   username: string;
   PlatformIcon: any; // ??
+  href?: string;
   socials?: { icon: any; handle: string; label: string; url?: string }[];
 }
 
-const { banner, avatar, username, PlatformIcon, socials = [] } = Astro.props;
+const { banner, avatar, username, PlatformIcon, socials = [], href } = Astro.props;
 ---
 
 <style>
@@ -17,8 +20,9 @@ const { banner, avatar, username, PlatformIcon, socials = [] } = Astro.props;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 2.5rem;
+    gap: 1.5rem;
     margin: 2rem auto;
+    margin-top: 0.5rem;
     max-width: 800px;
     width: 120%;
   }
@@ -28,10 +32,14 @@ const { banner, avatar, username, PlatformIcon, socials = [] } = Astro.props;
     height: 220px;
     border-radius: 10px;
     overflow: hidden;
-    background-color: #3d87cc;
-    color: white;
+    background: #121e2b;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+    margin-top: 0;
+    /* make this work when rendered as an <a> */
+    text-decoration: none;
+    color: inherit;
+    display: block;
   }
   .banner {
     width: 100%;
@@ -68,6 +76,10 @@ const { banner, avatar, username, PlatformIcon, socials = [] } = Astro.props;
     justify-content: center;
     z-index: 2;
   }
+  .card:focus {
+    outline: 3px solid rgba(74,170,255,0.25);
+    outline-offset: 2px;
+  }
   .socials {
     display: flex;
     flex-direction: column;
@@ -100,7 +112,7 @@ const { banner, avatar, username, PlatformIcon, socials = [] } = Astro.props;
     font-weight: 500;
     color: #2d4f6e;
     text-decoration: none;
-    background: #3d87cc;
+    background: #121e2b;
     color: #fff;
     border-radius: 999px;
     padding: 0.2em 0.8em;
@@ -110,14 +122,25 @@ const { banner, avatar, username, PlatformIcon, socials = [] } = Astro.props;
 </style>
 
 <div class="panel-row">
-  <div class="card">
+  {href ? (
+    <a class="card" href={href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${username} profile`}>
+      <Image src={banner} alt="Banner" class="banner" width={800} height={400} loading="eager" fetchpriority="high"/>
+      <div class="content">
+        <Image src={avatar} alt={`${username} avatar`} width={128} height={128} class="avatar" loading="eager" fetchpriority="high"/>
+        <div class="username">{username}</div>
+      </div>
+      <span class="PlatformIcon"><PlatformIcon /></span>
+    </a>
+  ) : (
+    <div class="card">
     <img src={banner} alt="Banner" class="banner" />
-    <div class="content">
-      <img src={avatar} alt={`${username} avatar`} class="avatar" />
-      <div class="username">{username}</div>
+      <div class="content">
+        <img src={avatar} alt={`${username} avatar`} />
+        <div class="username">{username}</div>
+      </div>
+      <span class="PlatformIcon"><PlatformIcon /></span>
     </div>
-    <span class="PlatformIcon"><PlatformIcon /></span>
-  </div>
+  )}
   {socials.length > 0 && (
     <div class="socials">
       {socials.map(({ icon: Icon, label, handle, url }) => (
