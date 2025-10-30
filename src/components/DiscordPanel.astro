@@ -145,18 +145,18 @@ const { banner, avatar, username, PlatformIcon, socials = [], href } = Astro.pro
 <div class="panel-row">
   {href ? (
     <a class="card" href={href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${username} profile`}>
-      <Image src={banner} alt="Banner" class="banner" width={800} height={400} loading="eager" fetchpriority="high"/>
+      <img src={banner} alt="Banner" class="banner" />
       <div class="content">
-        <Image src={avatar} alt={`${username} avatar`} width={128} height={128} class="avatar" loading="eager" fetchpriority="high"/>
+        <img src={avatar} alt={`${username} avatar`} class="avatar" />
         <div class="username">{username}</div>
       </div>
       <span class="PlatformIcon"><PlatformIcon /></span>
     </a>
   ) : (
     <div class="card">
-    <img src={banner} alt="Banner" class="banner" />
+      <img src={banner} alt="Banner" class="banner" />
       <div class="content">
-        <img src={avatar} alt={`${username} avatar`} />
+        <img src={avatar} alt={`${username} avatar`} class="avatar" />
         <div class="username">{username}</div>
       </div>
       <span class="PlatformIcon"><PlatformIcon /></span>

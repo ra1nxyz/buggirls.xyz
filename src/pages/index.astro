@@ -8,8 +8,6 @@ import DiscordIcon from '../components/icons(i cant understand svg injection)/di
 import OsuIcon from '../components/icons(i cant understand svg injection)/osu.astro';
 
 
-const response = await fetch('https://discord-api.fetchprofile-api.workers.dev/');
-const { avatar, banner } = await response.json();
 const username = 'ra1nxyz';
 
 const socials = [
@@ -28,7 +26,12 @@ import Counter from '../components/Counter.astro';
 		<p>i do things for fun and nothing else</p>
 		<h2>Socials</h2>
 	</div>
-	<DiscordCard banner={banner} avatar={avatar} username={username} PlatformIcon={DiscordIcon} socials={socials} href="https://discord.com/users/1056050756324696194"/>
+	<div id="profile-card">
+		<script type="module" src="/js/loadProfile.js"></script>
+	  <DiscordCard banner="/fumo.gif" avatar="/fumo.gif" username={username} PlatformIcon={DiscordIcon} socials={socials} href="https://discord.com/users/1056050756324696194"/>
+	</div>
+
+	
 	<div class="counter-wrapper">
       <Counter />
 	</div>
