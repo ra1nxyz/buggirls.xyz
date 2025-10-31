@@ -118,7 +118,7 @@ z-index: 100;
 pointer-events: none; 
 }
 .moxy a.moxy-link { 
-  color: #4af; pointer-events: auto; 
+  color: #9fc3ef; pointer-events: auto; 
 }
 .counter-wrapper {
 display: flex;
