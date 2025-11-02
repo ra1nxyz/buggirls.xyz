@@ -773,7 +773,7 @@ Can you beat my scores? :3
 
 <details><summary>
 
-### ~~*web/blue-zenith*~~ | `65 solves / 147 points`
+### web/blue-zenith | `65 solves / 147 points`
 </summary>
 
 ![Website showcase](assets/osuctf/web_blue-zenith.png)
