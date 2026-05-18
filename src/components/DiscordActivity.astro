@@ -1,0 +1,168 @@
+<div id="discord-activity">
+  Loading activity...
+</div>
+
+<script type="module">
+  const USER_ID = "1434739350993768630";
+  let currentActivity = null;
+  let progressInterval = null;
+  let lastActivityId = null;
+  let animationFrameId = null;
+
+  function getActivityImage(activity) {
+    const img = activity?.assets?.large_image;
+    if (!img) return null;
+
+    if (img.startsWith("mp:")) {
+      return `https://media.discordapp.net/${img.replace("mp:", "")}`;
+    }
+
+    return `https://cdn.discordapp.com/app-assets/${activity.application_id}/${img}.png`;
+  }
+
+function updateProgress() {
+     if (!currentActivity) {
+	animationFrameId = requestAnimationFrame(updateProgress);
+	return;
+     }
+
+     const start = currentActivity.timestamps?.start;
+     const end = currentActivity.timestamps?.end;
+
+     const fill = document.querySelector(".progress-fill");
+
+     if (start && end && fill) {
+	const now = Date.now();
+	const progress = (now - start) / (end - start);
+	fill.style.width = `${Math.min(Math.max(progress, 0), 1) * 100}%`;
+     } else if (fill) {
+	fill.style.width = "0%";
+     }
+
+  requestAnimationFrame(updateProgress);
+}  
+
+function renderActivity(activity) {
+  const el = document.getElementById("discord-activity");
+  const hasProgress = activity.timestamps?.start && activity.timestamps?.end;
+  const image = getActivityImage(activity);
+
+  el.innerHTML = `
+    <div class="activity-card">
+
+      ${image ? `<img class="activity-image" src="${image}" />` : ""}
+
+      <div class="activity-info">
+        <div class="activity-name">${activity.name}</div>
+        <div class="activity-details">
+          ${activity.details ?? ""} ${activity.state ? `- ${activity.state}` : ""}
+        </div>
+        <div class="progress-bar">
+           <div class="progress-fill"></div>
+        </div>
+      </div>
+
+    </div>
+  `;
+}
+
+async function refreshActivity() {
+  const res = await fetch(`https://api.lanyard.rest/v1/users/${USER_ID}`);
+  const json = await res.json();
+
+  const data = json?.data;
+
+  const activity =
+    data?.activities?.find(a => a.name !== "Custom Status" && a.application_id) ??
+    data?.activities?.find(a => a.name !== "Custom Status");
+
+  if (!activity) return;
+
+  if (activity.id !== lastActivityId) {
+    lastActivityId = activity.id;
+    currentActivity = activity;
+
+    renderActivity(activity);
+  }
+}
+updateProgress();  
+refreshActivity();
+setInterval(refreshActivity, 15000); 
+
+
+</script>
+
+<style is:global>
+#discord-activity {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.activity-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  width: 650px;
+  padding: 1rem;
+
+  border-radius: 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+
+  box-sizing: border-box;
+}
+
+.activity-image {
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px;
+  min-height: 48px;
+
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.activity-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.activity-name {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.activity-details {
+  opacity: 0.85;
+  font-size: 0.92rem;
+}
+
+.activity-state {
+  opacity: 0.6;
+  font-size: 0.82rem;
+  margin-top: 0.2rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 999px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: white;
+  width: 0%;
+  transition: width 0.2s linear;
+}
+</style>

@@ -17,7 +17,7 @@ const socials = [
 ];
 
 import Counter from '../components/Counter.astro';
-
+import DiscordActivity from "../components/DiscordActivity.astro";
 ---
 
 <BaseLayout title="Home", bodyClass='no-scroll'>
@@ -29,6 +29,8 @@ import Counter from '../components/Counter.astro';
 	<div id="profile-card">
 		<script type="module" src="/js/loadProfile.js"></script>
 	  <DiscordCard banner="/fumo.gif" avatar="/fumo.gif" username={username} PlatformIcon={DiscordIcon} socials={socials} href="https://discord.com/users/1434739350993768630"/>
+	 <DiscordActivity />
+
 	</div>
 
 	

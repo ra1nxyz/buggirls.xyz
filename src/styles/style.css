@@ -159,3 +159,11 @@ text-align: left !important;
 
   .blog-main, .projects-header { padding: 0 0.75rem; }
 }
+
+#profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
